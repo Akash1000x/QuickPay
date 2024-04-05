@@ -26,9 +26,11 @@ export const authOptions = {
                     return {
                         id: existingUser.id.toString(),
                         name: existingUser.name,
-                        email: existingUser.number
+                        email: existingUser.email
                     }
                 }
+
+                console.log("Invalid password");
                 return null;
             }
 
@@ -43,7 +45,7 @@ export const authOptions = {
                 return {
                     id: user.id.toString(),
                     name: user.name,
-                    email: user.number
+                    email: user.email
                 }
             } catch(e) {
                 console.error(e);
