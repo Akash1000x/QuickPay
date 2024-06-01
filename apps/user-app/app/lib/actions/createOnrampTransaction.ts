@@ -3,11 +3,9 @@
 import prisma from "@repo/db/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth";
+import { redirect } from "next/navigation";
 
-export async function createOnRampTransaction(
-  provider: string,
-  amount: number
-) {
+export async function createOnRampTransaction(provider: string, amount: number, redirectUrl: string) {
   const session = await getServerSession(authOptions);
 
   if (!session?.user || !session.user?.id) {
@@ -27,6 +25,8 @@ export async function createOnRampTransaction(
       userId: Number(session?.user?.id),
     },
   });
+
+  redirect(redirectUrl);
 
   return {
     message: "Done",
