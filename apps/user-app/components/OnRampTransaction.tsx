@@ -1,16 +1,24 @@
-import { Card } from "@repo/ui/card";
+"use client";
 
-export const OnRampTransactions = ({
-  transactions,
-}: {
-  transactions: {
-    time: Date;
-    amount: number;
-    // TODO: Can the type of `status` be more specific?
-    status: string;
-    provider: string;
-  }[];
-}) => {
+import { Card } from "@repo/ui/card";
+import React from "react";
+import { getOnRampTransactions } from "../app/lib/actions/getOnRampTransactions";
+import { useRecoilState } from "recoil";
+import { onRampTransactionsAtom } from "../../../packages/store/src/atoms";
+
+export const OnRampTransactions = () => {
+  const [transactions, setTransactions] = useRecoilState(
+    onRampTransactionsAtom,
+  );
+
+  React.useEffect(() => {
+    const fetchTransactions = async () => {
+      const transactions = await getOnRampTransactions();
+      setTransactions(transactions);
+    };
+    fetchTransactions();
+  }, []);
+
   if (!transactions.length) {
     return (
       <Card title="Recent Transactions">
@@ -18,6 +26,7 @@ export const OnRampTransactions = ({
       </Card>
     );
   }
+
   return (
     <Card title="Recent Transactions">
       <div className="pt-2">
