@@ -9,8 +9,7 @@ app.get("/", (req, res) => {
   res.send("Server is running");
 });
 
-app.post("/hdfcWebhook", async (req, res) => {
-  //TODO: Add zod validation here?
+app.post("/bank-webhook", async (req, res) => {
   const paymentInformation: {
     token: string;
     userId: string;
@@ -20,8 +19,8 @@ app.post("/hdfcWebhook", async (req, res) => {
     userId: req.body.user_identifier,
     amount: req.body.amount,
   };
-  // Update balance in db, add txn
 
+  // Update balance in db, add txn
   try {
     await prisma.$transaction([
       prisma.balance.update({
@@ -45,8 +44,8 @@ app.post("/hdfcWebhook", async (req, res) => {
       }),
     ]);
 
-    res.json({
-      message: "Captured",
+    res.status(200).json({
+      message: "Transaction successful",
     });
   } catch (e) {
     console.error(e);
