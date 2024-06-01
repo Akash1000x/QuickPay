@@ -5,7 +5,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../auth";
 import { redirect } from "next/navigation";
 
-export async function createOnRampTransaction(provider: string, amount: number, redirectUrl: string) {
+export async function createOnRampTransaction(
+  provider: string,
+  amount: number,
+  redirectUrl: string,
+) {
   const session = await getServerSession(authOptions);
 
   if (!session?.user || !session.user?.id) {

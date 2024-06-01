@@ -17,7 +17,7 @@ export const GET = async () => {
       },
       {
         status: 403,
-      }
+      },
     );
   }
   return NextResponse.json(
@@ -26,6 +26,6 @@ export const GET = async () => {
     },
     {
       status: 403,
-    }
+    },
   );
 };
