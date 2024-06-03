@@ -1,36 +1,6 @@
-import prisma from "@repo/db/client";
 import { SendCard } from "../../../components/SendCard";
-import { authOptions } from "../../lib/auth";
-import { getServerSession } from "next-auth";
 import { P2pTransfer } from "../../../components/P2pTransfer";
-
-async function getP2pTransfer() {
-  const session = await getServerSession(authOptions);
-  const tranfer = await prisma.user.findUnique({
-    where: {
-      id: Number(session?.user?.id),
-    },
-    include: {
-      sentTransfers: { orderBy: { timestamp: "desc" } },
-      receivedTransfers: { orderBy: { timestamp: "desc" } },
-    },
-  });
-  return {
-    sentTransfers: tranfer?.sentTransfers.map((t) => ({
-      id: t.id,
-      amount: t.amount,
-      timestamp: t.timestamp.getTime(),
-      fromUserId: t.fromUserId,
-      toUserId: t.toUserId,
-    })),
-    receivedTransfers: tranfer?.receivedTransfers.map((t) => ({
-      amount: t.amount,
-      timestamp: t.timestamp.getTime(),
-      fromUserId: t.fromUserId,
-      toUserId: t.toUserId,
-    })),
-  };
-}
+import { getP2pTransfer } from "../../lib/actions/getP2pTransfer";
 
 export interface P2pTransferTypes {
   amount: number;
