@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 interface ButtonProps {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const Button = ({ onClick, children }: ButtonProps) => {
