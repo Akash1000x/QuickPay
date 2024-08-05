@@ -24,7 +24,10 @@ jobs:
           context: .
           file: ./docker/Dockerfile.user
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/rapid-deploy:latest
+          tags: akash100x/rapid-deploy:latest
+          
+      - name: Verify Pushed Image
+        run: docker pull akash100x/rapid-deploy:latest
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
