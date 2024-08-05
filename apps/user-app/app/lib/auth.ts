@@ -9,7 +9,7 @@ export const authOptions = {
       credentials: {
         phone: {
           label: "Phone number",
-          type: "text",
+          type: "tel",
           placeholder: "1231231231",
           required: true,
         },
@@ -43,6 +43,9 @@ export const authOptions = {
         }
 
         try {
+          if (credentials.phone.length > 10 || credentials.phone.length < 10) {
+            throw Error("Number should be 10 digit");
+          }
           const user = await db.user.create({
             data: {
               number: credentials.phone,
