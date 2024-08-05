@@ -9,18 +9,7 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn({
-      user,
-      account,
-    }: {
-      user: {
-        email: string;
-        name: string;
-      };
-      account: {
-        provider: "google" | "github";
-      };
-    }) {
+    async signIn({ user, account }: { user: any; account: any }) {
       console.log("hi signin");
       if (!user || !user.email) {
         return false;
@@ -45,6 +34,18 @@ export const authOptions = {
       });
 
       return true;
+    },
+    async jwt({ token, account }: { token: any; account: any }) {
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
+    async session({ session, token }: { session: any; token: any }) {
+      session.accessToken = token.accessToken;
+      session.user.id = token.id;
+
+      return session;
     },
   },
   secret: process.env.NEXTAUTH_SECRET || "secret",
