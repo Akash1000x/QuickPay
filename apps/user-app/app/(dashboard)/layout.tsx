@@ -15,11 +15,11 @@ export default function Layout({
             icon={<TransferIcon />}
             title="Transfer"
           />
-          <SidebarItem
+          {/* <SidebarItem
             href={"/transactions"}
             icon={<TransactionsIcon />}
             title="Transactions"
-          />
+          /> */}
           <SidebarItem
             href={"/p2p"}
             icon={<P2PTransferIcon />}
