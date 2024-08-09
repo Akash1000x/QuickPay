@@ -76,7 +76,7 @@ export default function Component({
   }, []);
   return (
     <div className="space-y-6">
-      <Card title={"Received"} clasName="border-t-0">
+      <Card title={"Received"}>
         <ChartContainer config={chartConfig} className="min-h-[220px] w-full">
           <AreaChart
             accessibilityLayer
