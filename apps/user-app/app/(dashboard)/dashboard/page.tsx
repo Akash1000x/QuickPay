@@ -6,8 +6,6 @@ export default async function DashBoard() {
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <LineChart
-        width={800}
-        height={500}
         sentTransfers={sentTransfers}
         receivedTransfers={receivedTransfers}
       />
