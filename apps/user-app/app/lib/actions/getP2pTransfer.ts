@@ -9,8 +9,8 @@ export async function getP2pTransfer() {
       id: Number(session?.user?.id),
     },
     include: {
-      sentTransfers: { orderBy: { timestamp: "desc" } },
-      receivedTransfers: { orderBy: { timestamp: "desc" } },
+      sentTransfers: { orderBy: { timestamp: "asc" } },
+      receivedTransfers: { orderBy: { timestamp: "asc" } },
     },
   });
   return {
